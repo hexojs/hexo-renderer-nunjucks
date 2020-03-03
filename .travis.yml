@@ -7,7 +7,7 @@ node_js:
   - "node"
 
 before_install:
-  - npm install coveralls
+  - npm install --no-save coveralls
 
 script:
   - npm test
@@ -15,3 +15,10 @@ script:
 
 after_script:
   - nyc report --reporter=text-lcov | coveralls
+
+deploy:
+  provider: npm
+  email: "$NPM_USER_EMAIL"
+  api-key: "$NPM_API_KEY"
+  on:
+    tags: true
